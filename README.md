@@ -1,3 +1,5 @@
+https://www.valentinog.com/blog/redux/#React_Redux_tutorial_wrapping_up
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
