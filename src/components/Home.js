@@ -58,4 +58,5 @@ const mapStateToProps = state => {
   };
 };
 
+//we use higher order functions to connect to the redux store
 export default connect(mapStateToProps)(Home);

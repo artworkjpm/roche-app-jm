@@ -5,9 +5,10 @@ const About = () => {
   return (
     <div className="container">
       <h4 className="center">About</h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo iusto tenetur distinctio commodi velit? Architecto hic dolores nobis, tempore natus ipsa saepe corrupti porro quas suscipit alias velit incidunt sunt.</p>
+      <p>This is an example of a HIGH ORDER FUNCTION, just to change the color of About page text, hit refresh to change color</p>
     </div>
   );
 };
 
+//this is an example of a HIGH ORDER FUNCTION, just to change the color of About page text, hit refresh to change color
 export default Rainbow(About);
