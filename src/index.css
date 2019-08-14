@@ -1,0 +1,16 @@
+a.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+i.red-text {
+  cursor: pointer;
+}
+ul.listx {
+  padding-left: 20px;
+}
+ul.listx li {
+  list-style-type: disc;
+}
+.enlargeImage {
+  width: unset;
+  cursor: pointer;
+}

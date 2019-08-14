@@ -8,6 +8,9 @@ function rootReducer(state = initialState, action) {
       articles: state.articles.concat(action.payload)
     });
   }
+  /*  } else if (action.type === "REMOVE_ARTICLE") {
+    alert("delete");
+  } */
   return state;
 }
 export default rootReducer;
