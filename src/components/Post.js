@@ -35,7 +35,7 @@ const mapStateToProps = (state, ownProps) => {
   //we have to return an object in order to use the data
   //we have to
   return {
-    post: state.posts.find(post => post.id === urlId)
+    post: state.rootReducerPosts.posts.find(post => post.id === urlId)
   };
 };
 

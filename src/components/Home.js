@@ -32,16 +32,38 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="col" />
+          <h4 className="center">Buscar Pacientes</h4>
+          <p>Introduzca el ID del médico</p>
+
+          <form action="submit">
+            <label htmlFor="idmedico">ID de médico</label>
+            <input type="text" placeholder="ID de médico" />
+          </form>
+        </div>
+
+        <div className="row">
           <div className="col m6">
             {" "}
             <h4 className="center">Home</h4>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo iusto tenetur distinctio commodi velit? Architecto hic dolores nobis, tempore natus ipsa saepe corrupti porro quas suscipit alias velit incidunt sunt.</p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo
+              iusto tenetur distinctio commodi velit? Architecto hic dolores
+              nobis, tempore natus ipsa saepe corrupti porro quas suscipit alias
+              velit incidunt sunt.
+            </p>
             <ul className="listx"> {postList}</ul>
           </div>
           <div className="col m6">
-            <div className="center">
+            <div className="center beforeImage">
               <p>Understand Redux:</p>
-              <img src="images/redux.JPG" alt="React explanation" width="150" onClick={this.handleOpen} className={this.state.openImage ? "enlargeImage" : ""} />
+              <img
+                src="images/redux.JPG"
+                alt="React explanation"
+                width="150"
+                onClick={this.handleOpen}
+                className={this.state.openImage ? "enlargeImage" : ""}
+              />
             </div>
 
             <TodoComponent />
@@ -54,7 +76,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts
+    posts: state.rootReducerPosts.posts
   };
 };
 

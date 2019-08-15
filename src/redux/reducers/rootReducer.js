@@ -1,8 +1,20 @@
-const initState = {
-  posts: [{ id: 1, title: "xxx", body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?" }, { id: 2, title: "yyy", body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?" }, { id: 3, title: "zzz", body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?" }]
+import { combineReducers } from "redux";
+
+import "../../data/data.json";
+import posts from "../../data/postsData.json";
+import pacients from "../../data/data.json";
+
+const initStatePacients = { pacients };
+console.log(initStatePacients);
+
+const initState = { posts };
+const test = () => {
+  return {
+    test: "test"
+  };
 };
 
-const rootReducer = (state = initState, action) => {
+const rootReducerPosts = (state = initState, action) => {
   if (action.type === "DELETE_POST") {
     //don't alter original array, create new array using filter
     let newPosts = state.posts.filter(post => {
@@ -19,4 +31,6 @@ const rootReducer = (state = initState, action) => {
   return state;
 };
 
-export default rootReducer;
+export default combineReducers({
+  rootReducerPosts
+});
