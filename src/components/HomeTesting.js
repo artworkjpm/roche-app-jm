@@ -1,0 +1,63 @@
+import React, { Component } from "react";
+import TodoComponent from "./TodoComponent";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+class HomeTesting extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openImage: false
+    };
+  }
+
+  handleOpen = () => {
+    this.setState(state => ({
+      openImage: !state.openImage
+    }));
+  };
+
+  render() {
+    // console.log(this.props);
+    //I use destructuring because posts is an array and destructuring is just nicer
+    const { posts } = this.props;
+    const postList = posts.length ? (
+      posts.map(post => {
+        return (
+          <Link to={"/" + post.id} key={post.id}>
+            <li>{post.title}</li>
+          </Link>
+        );
+      })
+    ) : (
+      <div>No posts yet</div>
+    );
+
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col m6">
+            <ul className="listx"> {postList}</ul>
+          </div>
+          <div className="col m6">
+            <div className="center beforeImage">
+              <p>Understand Redux:</p>
+              <img src="images/redux.JPG" alt="React explanation" width="150" onClick={this.handleOpen} className={this.state.openImage ? "enlargeImage" : ""} />
+            </div>
+
+            <TodoComponent />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    posts: state.rootReducerPosts.posts
+  };
+};
+
+//we use higher order functions to connect to the redux store
+export default connect(mapStateToProps)(HomeTesting);

@@ -1,34 +1,40 @@
 import React, { Component } from "react";
-import TodoComponent from "./TodoComponent";
-import { Link } from "react-router-dom";
+import HomeTesting from "./HomeTesting";
 import { connect } from "react-redux";
 
 class Home extends Component {
-  state = {
-    openImage: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  handleOpen = () => {
-    this.setState(state => ({
-      openImage: !state.openImage
-    }));
-  };
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    //get the typed value, see if it exists in the data.practionerID, if yes load into url "/patients/id"
+    event.preventDefault();
+    const data = this.props.patients;
+    const typedId = this.state.value;
+    function checkPid(id) {
+      return id.practitionerId === typedId;
+    }
+    let newList = data.filter(checkPid);
+    console.log(newList);
+
+    if (newList.length) {
+      this.props.history.push("/patients/" + typedId);
+    } else {
+      alert("Sorry, we cannot see a Practioner with that ID number, are you sure it's correct?");
+    }
+  }
+
   render() {
-    // console.log(this.props);
-    //I use destructuring because posts is an array and destructuring is just nicer
-    const { posts } = this.props;
-    const postList = posts.length ? (
-      posts.map(post => {
-        return (
-          <Link to={"/" + post.id} key={post.id}>
-            <li>{post.title}</li>
-          </Link>
-        );
-      })
-    ) : (
-      <div>No posts yet</div>
-    );
-
     return (
       <div className="container">
         <div className="row">
@@ -37,28 +43,14 @@ class Home extends Component {
           <p>Introduzca el ID del médico</p>
 
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="idmedico">ID de médico</label>
-            <input type="text" placeholder="ID de médico" />
+            <label>
+              ID de médico
+              <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="ID de médico" />
+            </label>
             <input type="submit" value="Submit" />
           </form>
         </div>
-
-        <div className="row">
-          <div className="col m6">
-            {" "}
-            <h4 className="center">Home</h4>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo iusto tenetur distinctio commodi velit? Architecto hic dolores nobis, tempore natus ipsa saepe corrupti porro quas suscipit alias velit incidunt sunt.</p>
-            <ul className="listx"> {postList}</ul>
-          </div>
-          <div className="col m6">
-            <div className="center beforeImage">
-              <p>Understand Redux:</p>
-              <img src="images/redux.JPG" alt="React explanation" width="150" onClick={this.handleOpen} className={this.state.openImage ? "enlargeImage" : ""} />
-            </div>
-
-            <TodoComponent />
-          </div>
-        </div>
+        <HomeTesting />
       </div>
     );
   }
@@ -66,7 +58,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.rootReducerPosts.posts
+    patients: state.reducerPatients.patients
   };
 };
 
