@@ -18,3 +18,6 @@ ul.listx li {
 .beforeImage img {
   cursor: pointer;
 }
+.mainbox {
+  margin-top: 50px;
+}

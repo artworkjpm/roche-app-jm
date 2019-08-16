@@ -4,7 +4,7 @@ import { Link, NavLink, withRouter } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <nav className="nav-wrapper red darken-3">
+      <nav className="nav-wrapper teal lighten-1">
         <div className="container">
           <Link to="/" className="brand-logo">
             Medical staff

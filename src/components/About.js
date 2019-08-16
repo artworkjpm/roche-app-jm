@@ -1,11 +1,16 @@
 import React from "react";
+import HomeTesting from "./HomeTesting";
 import Rainbow from "./HOC/Rainbow";
 
 const About = () => {
   return (
     <div className="container">
       <h4 className="center">About</h4>
-      <p>This is an example of a HIGH ORDER FUNCTION, hit refresh to change the color of the text and see the super powers of a HOC!</p>
+      <p>
+        This is an example of a HIGH ORDER FUNCTION, hit refresh to change the
+        color of the text and see the super powers of a HOC!
+      </p>
+      <HomeTesting />
     </div>
   );
 };
