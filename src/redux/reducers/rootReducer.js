@@ -1,19 +1,15 @@
+import posts from "../../data/postsData.json";
+import patients from "../../data/data.json";
 import { combineReducers } from "redux";
 
-import "../../data/data.json";
-import posts from "../../data/postsData.json";
-import pacients from "../../data/data.json";
+const initStatePatients = { patients };
+console.log(initStatePatients);
 
-const initStatePacients = { pacients };
-console.log(initStatePacients);
-
-const initState = { posts };
-const test = () => {
-  return {
-    test: "test"
-  };
+const reducerPatients = (state = initStatePatients, action) => {
+  return state;
 };
 
+const initState = { posts };
 const rootReducerPosts = (state = initState, action) => {
   if (action.type === "DELETE_POST") {
     //don't alter original array, create new array using filter
@@ -32,5 +28,6 @@ const rootReducerPosts = (state = initState, action) => {
 };
 
 export default combineReducers({
-  rootReducerPosts
+  rootReducerPosts,
+  reducerPatients
 });
