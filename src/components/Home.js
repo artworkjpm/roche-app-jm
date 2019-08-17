@@ -29,9 +29,7 @@ class Home extends Component {
     if (newList.length) {
       this.props.history.push("/patients/" + typedId);
     } else {
-      alert(
-        "Sorry, we cannot see a Practioner with that ID number, are you sure it's correct?"
-      );
+      alert("Sorry, we cannot see a Practioner with that ID number, are you sure it's correct?");
     }
   }
 
@@ -44,19 +42,9 @@ class Home extends Component {
             <p>Introduzca el ID del médico</p>
 
             <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                name="practitionerID"
-                value={this.state.value}
-                onChange={this.handleChange}
-                placeholder="ID de médico"
-              />
+              <input type="text" name="practitionerID" value={this.state.value} onChange={this.handleChange} placeholder="ID de médico" />
 
-              <button
-                className="btn waves-effect waves-light"
-                type="submit"
-                name="action"
-              >
+              <button className="btn waves-effect waves-light" type="submit" name="action">
                 Submit
                 <i className="material-icons right">send</i>
               </button>

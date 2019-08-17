@@ -7,6 +7,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Post from "./components/Post";
 import PatientList from "./components/medico/patientList";
+import Graph from "./components/medico/graph"
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/contact" component={Contact} />
             <Route exact path="/:post_id" component={Post} />
             <Route exact path="/patients/:practitionerId" component={PatientList} />
+            <Route exact path="/patients/:practitionerId/:patientId" component={Graph} />
           </Switch>
         </div>
       </BrowserRouter>

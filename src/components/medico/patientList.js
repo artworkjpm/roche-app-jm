@@ -4,6 +4,16 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 
 class PatientList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(patientId) {
+    //get current url and push patientId in order to trigger the react router to load the graph
+    let currentUrl = this.props.location.pathname;
+    this.props.history.push(currentUrl + "/" + patientId);
+  }
   render() {
     console.log(this.props);
 
@@ -11,9 +21,7 @@ class PatientList extends Component {
       <div className="container">
         <div className="row">
           <div className="col">
-            <h4 className="center">
-              Patient list ({this.props.patient.length})
-            </h4>
+            <h4 className="center">Patient list ({this.props.patient.length})</h4>
 
             <table className="responsive-table highlight">
               <thead>
@@ -33,16 +41,17 @@ class PatientList extends Component {
                       <td>
                         <Moment format="DD/MM/YYYY">{pat.dateOfBirth}</Moment>
                       </td>
-                      <td>
-                        {pat.diabetesType.includes("1") ? "Tipo 1" : "Tipo 2"}
-                      </td>
+                      <td>{pat.diabetesType.includes("1") ? "Tipo 1" : "Tipo 2"}</td>
                       <td>
                         <button
                           className="btn waves-effect waves-light"
                           name="action"
+                          onClick={() => {
+                            this.handleClick(pat.patientId);
+                          }}
                         >
                           Ver Perfil Del Paciente
-                          <i class="material-icons right">assessment</i>
+                          <i className="material-icons right">assessment</i>
                         </button>
                       </td>
                     </tr>
@@ -65,9 +74,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(urlPractitionerId);
   console.log(state.reducerPatients.patients[0].name);
   return {
-    patient: state.reducerPatients.patients.filter(
-      patient => patient.practitionerId === urlPractitionerId
-    )
+    patient: state.reducerPatients.patients.filter(patient => patient.practitionerId === urlPractitionerId)
   };
 };
 
