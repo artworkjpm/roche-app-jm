@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-import GraphData from "./graphData.json";
+//import GraphData from "./graphData.json";
 import { connect } from "react-redux";
 
 class Graph extends PureComponent {
@@ -12,8 +12,12 @@ class Graph extends PureComponent {
     const data = this.props.patient[0];
     const OldData = data.glucoseMesures;
     console.log(OldData);
+    //we have to add the data into one array in order for Recharts to work
     OldData.forEach(element => {
-      element.ideal2 = [data.ranges.ideal.from, data.ranges.ideal.to];
+      element.ideal = [data.ranges.ideal.from, data.ranges.ideal.to];
+      element.lowest = [data.ranges.low];
+      element.highest = [data.ranges.high];
+      element.times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
     });
 
     /* const newData = Object.assign(OldData, data.ranges);
@@ -35,36 +39,22 @@ class Graph extends PureComponent {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis padding={{ left: 0, right: 0 }} />
-            <Tooltip />
-            <Legend />
-
-            <Area type="monotone" dataKey="ideal2" fill="#8884d8" stroke="#8884d8" />
-            <Line type="monotone" dataKey="glucose" stroke="#ff7300" />
-            <Line type="monotone" dataKey="" stackId="1" dot={false} stroke="red" />
-          </ComposedChart>
-        </ResponsiveContainer>
-
-        <ResponsiveContainer width="100%" height={400}>
-          <ComposedChart
-            data={GraphData}
-            margin={{
-              top: 20,
-              right: 20,
-              left: 0,
-              bottom: 0
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
+            <XAxis
+              hide="true"
+              dataKey="times"
+              padding={{
+                right: 0,
+                left: 0
+              }}
+            />
             <YAxis />
             <Tooltip />
             <Legend />
 
-            <Area type="monotone" dataKey="ideal" fill="#8884d8" stroke="#8884d8" />
-            <Line type="monotone" dataKey="glucose" stroke="#ff7300" />
-            <Line type="monotone" dataKey="" stackId="1" dot={false} stroke="red" />
+            <Area type="monotone" dataKey="ideal" fill="#a0db78" dot={false} stroke="#a0db78" />
+            <Line type="monotone" dataKey="glucose" stroke="#000000" />
+            <Line type="monotone" dataKey="lowest" dot={false} stroke="red" />
+            <Line type="monotone" dataKey="highest" dot={false} stroke="green" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
