@@ -11,27 +11,32 @@ class Graph extends PureComponent {
 
     const data = this.props.patient[0];
     const OldData = data.glucoseMesures;
-    const newData = Object.assign(OldData, data.ranges);
+    console.log(OldData);
+    OldData.forEach(element => {
+      element.ideal2 = [data.ranges.ideal.from, data.ranges.ideal.to];
+    });
+
+    /* const newData = Object.assign(OldData, data.ranges);
     newData.push({ ideal2: [data.ranges.ideal.from, data.ranges.ideal.to] });
 
-    console.log("newData ", newData);
+    console.log("newData ", newData); */
     return (
       <div>
         <h4 className="center">{this.props.patient[0].fullname}</h4>
 
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
-            data={newData}
+            data={OldData}
             margin={{
               top: 20,
               right: 20,
-              left: 0,
+              left: 20,
               bottom: 0
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
-            <YAxis />
+            <YAxis padding={{ left: 0, right: 0 }} />
             <Tooltip />
             <Legend />
 
