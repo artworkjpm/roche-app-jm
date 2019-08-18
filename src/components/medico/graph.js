@@ -8,9 +8,38 @@ class Graph extends PureComponent {
 
   render() {
     console.log(this.props);
+
+    const data = this.props.patient[0];
+    const OldData = data.glucoseMesures;
+    const newData = Object.assign(OldData, data.ranges);
+    newData.push.glucoseMesures = { ideal2: [data.ranges.ideal.from, data.ranges.ideal.to] };
+
+    console.log("newData ", newData);
     return (
       <div>
         <h4 className="center">{this.props.patient[0].fullname}</h4>
+
+        <ResponsiveContainer width="100%" height={400}>
+          <ComposedChart
+            data={newData}
+            margin={{
+              top: 20,
+              right: 20,
+              left: 0,
+              bottom: 0
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+
+            <Area type="monotone" dataKey="ideal2" fill="#8884d8" stroke="#8884d8" />
+            <Line type="monotone" dataKey="glucose" stroke="#ff7300" />
+            <Line type="monotone" dataKey="" stackId="1" dot={false} stroke="red" />
+          </ComposedChart>
+        </ResponsiveContainer>
 
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
@@ -23,13 +52,14 @@ class Graph extends PureComponent {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timeBlocks" />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Legend />
+
             <Area type="monotone" dataKey="ideal" fill="#8884d8" stroke="#8884d8" />
             <Line type="monotone" dataKey="glucose" stroke="#ff7300" />
-            <Line type="monotone" dataKey="low" stackId="1" dot={false} stroke="red" />
+            <Line type="monotone" dataKey="" stackId="1" dot={false} stroke="red" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -38,16 +68,16 @@ class Graph extends PureComponent {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  //we need to get the url id (/number) and match it to id of the data
-  //we can obtain href url from the props.match
+  //obtain patient id in url
   let urlpatientId = ownProps.match.params.patientId;
-  //we have to return an object in order to use the data
+  //check we have it
   console.log(urlpatientId);
   console.log(state.reducerPatients.patients[0].name);
+  // get the data for the patient with that id
   return {
     patient: state.reducerPatients.patients.filter(patient => patient.patientId === urlpatientId)
   };
 };
 
-//we create a higher order component to give PatientlList access to the redux store data
+//add the patient data as a prop, using connect as a higher order component
 export default connect(mapStateToProps)(Graph);
