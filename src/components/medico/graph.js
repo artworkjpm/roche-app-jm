@@ -12,7 +12,7 @@ class Graph extends PureComponent {
     const data = this.props.patient[0];
     const OldData = data.glucoseMesures;
     const newData = Object.assign(OldData, data.ranges);
-    newData.push.glucoseMesures = { ideal2: [data.ranges.ideal.from, data.ranges.ideal.to] };
+    newData.push({ ideal2: [data.ranges.ideal.from, data.ranges.ideal.to] });
 
     console.log("newData ", newData);
     return (
