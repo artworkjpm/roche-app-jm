@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import Moment from "react-moment";
 import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 //import GraphData from "./graphData.json";
 import { connect } from "react-redux";
@@ -27,6 +28,9 @@ class Graph extends PureComponent {
     return (
       <div>
         <h4 className="center">{this.props.patient[0].fullname}</h4>
+        <h5 className="center">
+          {this.props.patient[0].diabetesType.includes("1") ? "Tipo 1" : "Tipo 2"} &nbsp;&nbsp; Age: {<Moment diff={this.props.patient[0].dateOfBirth} unit="years" />} &nbsp;&nbsp; DOB: {<Moment format="DD/MM/YYYY">{this.props.patient[0].dateOfBirth}</Moment>}
+        </h5>
 
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
@@ -40,7 +44,6 @@ class Graph extends PureComponent {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-              hide="true"
               dataKey="times"
               padding={{
                 right: 0,
