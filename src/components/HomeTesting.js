@@ -24,9 +24,9 @@ class HomeTesting extends Component {
     const postList = posts.length ? (
       posts.map(post => {
         return (
-          <Link to={"/" + post.id} key={post.id}>
-            <li>{post.title}</li>
-          </Link>
+          <li className="collection-item" key={post.id}>
+            <Link to={"/" + post.id}>{post.title} </Link>
+          </li>
         );
       })
     ) : (
@@ -37,11 +37,11 @@ class HomeTesting extends Component {
       <div className="container">
         <div className="row">
           <div className="col m6">
-            <ul className="listx"> {postList}</ul>
+            <ul className="collection"> {postList}</ul>
           </div>
           <div className="col m6">
             <div className="center beforeImage">
-              <p>Understand Redux:</p>
+              <p>Click here to see this diagram bigger, Understanding Redux:</p>
               <img src="images/redux.JPG" alt="React explanation" width="150" onClick={this.handleOpen} className={this.state.openImage ? "enlargeImage" : ""} />
             </div>
 

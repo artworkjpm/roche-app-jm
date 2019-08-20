@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import Moment from "react-moment";
-import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import moment from "moment";
+import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
 //import GraphData from "./graphData.json";
 import { connect } from "react-redux";
 
@@ -19,45 +20,62 @@ class Graph extends PureComponent {
       element.lowest = [data.ranges.low];
       element.highest = [data.ranges.high];
       element.times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
+      element.date = moment(element.date).format("DD/MM/YYYY HH:MM");
     });
 
-    /* const newData = Object.assign(OldData, data.ranges);
-    newData.push({ ideal2: [data.ranges.ideal.from, data.ranges.ideal.to] });
+    const CustomTooltip = ({ active, payload, label }) => {
+      if (active) {
+        return (
+          <div className="custom-tooltip">
+            <p className="label">{`${label} : ${payload[3].value}`}</p>
+            <p className="intro">test</p>
+            <p className="desc">Anything you want can be displayed here.</p>
+          </div>
+        );
+      }
 
-    console.log("newData ", newData); */
+      return null;
+    };
+
+    const customLabel = () => {
+      return (
+        <text x={40} y={10} dy={0} width="100%" fill="#000000">
+          Hora de acostartse
+        </text>
+      );
+    };
+
     return (
       <div>
         <h4 className="center">{this.props.patient[0].fullname}</h4>
         <h5 className="center">
           {this.props.patient[0].diabetesType.includes("1") ? "Tipo 1" : "Tipo 2"} &nbsp;&nbsp; Age: {<Moment diff={this.props.patient[0].dateOfBirth} unit="years" />} &nbsp;&nbsp; DOB: {<Moment format="DD/MM/YYYY">{this.props.patient[0].dateOfBirth}</Moment>}
+          <br />
+          <br />
         </h5>
 
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
             data={OldData}
             margin={{
-              top: 20,
+              top: 30,
               right: 20,
               left: 20,
               bottom: 0
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="times"
-              padding={{
-                right: 0,
-                left: 0
-              }}
-            />
-            <YAxis />
-            <Tooltip />
+
+            <XAxis dataKey="times" label={customLabel} orientation="bottom" />
+            <XAxis dataKey="date" label={customLabel} orientation="top" />
+            <YAxis label={{ value: "Glucemia (mg/dL)", angle: -90, position: "insideLeft", textAnchor: "middle" }} />
+            <Tooltip dataKey="date" />
             <Legend />
 
             <Area type="monotone" dataKey="ideal" fill="#a0db78" dot={false} stroke="#a0db78" />
             <Line type="monotone" dataKey="glucose" stroke="#000000" />
-            <Line type="monotone" dataKey="lowest" dot={false} stroke="red" />
-            <Line type="monotone" dataKey="highest" dot={false} stroke="green" />
+            <Line type="monotone" name="lowest" dataKey="lowest" dot={false} stroke="red" />
+            <Line type="monotone" name="highest" dataKey="highest" dot={false} stroke="green" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

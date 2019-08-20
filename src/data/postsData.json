@@ -1,17 +1,17 @@
 [
-    {
-        "id": 1,
-        "title": "xxx",
-        "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?"
-    },
-    {
-        "id": 2,
-        "title": "yyy",
-        "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?"
-    },
-    {
-        "id": 3,
-        "title": "zzz",
-        "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi molestiae possimus cupiditate laborum natus consectetur, exercitationem deserunt saepe in animi voluptas numquam non. Sint nam impedit voluptatum at fuga quia?"
-    }
+  {
+    "id": 1,
+    "title": "Who is John Moran?",
+    "body": "Born in London, living in Barcelona since 2016, no plans to leave. Has a daughter and lovely apartment near the beach in El Prat. He loves Front End Development and developing his development! He loves all things javascript and making apps that work well and look beautiful."
+  },
+  {
+    "id": 2,
+    "title": "Why should you consider him for the job?",
+    "body": "He used to be a graphic designer but has been coding for the web since 2013, so you are getting a near all rounder. He still has things to learn but that makes him hungary to go to work and do more projects with enthusiasm"
+  },
+  {
+    "id": 3,
+    "title": "Can you really trust this guy?",
+    "body": "He's not going anywhere, he was a long term job and wants to grow within a company, to evolve in to other aspects in the future, maybe Project Management, Consulting, Tech Lead...wherever the role takes him. "
+  }
 ]

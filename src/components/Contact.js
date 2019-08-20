@@ -4,7 +4,10 @@ const Contact = props => {
   return (
     <div className="container">
       <h4 className="center">Contact</h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo iusto tenetur distinctio commodi velit? Architecto hic dolores nobis, tempore natus ipsa saepe corrupti porro quas suscipit alias velit incidunt sunt.</p>
+      <p>I'm actually working in Sant Cugat, so I can easily attend a second interview. </p>
+
+      <p>Call me on 695966706</p>
+      <p>Email: johnnymoran44@hotmail.com</p>
     </div>
   );
 };

@@ -6,7 +6,7 @@ class Post extends Component {
   handleClick = () => {
     this.props.deletePost(this.props.post.id);
     //redirect to home page after deleting post
-    this.props.history.push("/");
+    this.props.history.push("/about");
   };
   render() {
     console.log(this.props);
