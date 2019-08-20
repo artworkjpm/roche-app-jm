@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import Moment from "react-moment";
 import moment from "moment";
-import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
+import { ResponsiveContainer, ComposedChart, Line, LineChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
 //import GraphData from "./graphData.json";
 import { connect } from "react-redux";
+//import * as d3 from "d3";
 
 class Graph extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/9xopwa9v/";
@@ -66,15 +67,17 @@ class Graph extends PureComponent {
           >
             <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis dataKey="times" label={customLabel} orientation="bottom" />
-            <XAxis dataKey="date" label={customLabel} orientation="top" />
+            <XAxis dataKey="date" label={customLabel} />
+
             <YAxis label={{ value: "Glucemia (mg/dL)", angle: -90, position: "insideLeft", textAnchor: "middle" }} />
             <Tooltip dataKey="date" />
             <Legend />
 
             <Area type="monotone" dataKey="ideal" fill="#a0db78" dot={false} stroke="#a0db78" />
             <Line type="monotone" dataKey="glucose" stroke="#000000" />
-            <Line type="monotone" name="lowest" dataKey="lowest" dot={false} stroke="red" />
+            <Line type="monotone" name="lowest" dataKey="lowest" dot={false} stroke="red" label="lowest">
+              <Label value="Lowest" position="top" />
+            </Line>
             <Line type="monotone" name="highest" dataKey="highest" dot={false} stroke="green" />
           </ComposedChart>
         </ResponsiveContainer>
