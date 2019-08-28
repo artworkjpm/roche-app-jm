@@ -22,6 +22,19 @@ class Graph2 extends PureComponent {
     });
 
     console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose));
+    /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
+
+    if (OldData.length !== 9) {
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+    } */
 
     const chartData = {
       type: "line",

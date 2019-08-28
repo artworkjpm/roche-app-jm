@@ -1,10 +1,8 @@
 import React, { PureComponent } from "react";
 import Moment from "react-moment";
 import moment from "moment";
-import { ResponsiveContainer, ComposedChart, Line, LineChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
-//import GraphData from "./graphData.json";
+import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
 import { connect } from "react-redux";
-//import * as d3 from "d3";
 
 class Graph extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/9xopwa9v/";
@@ -14,25 +12,8 @@ class Graph extends PureComponent {
 
     const data = this.props.patient[0];
     const OldData = data.glucoseMesures;
-    console.log("OldData", OldData.length);
-
-    /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
-
-    if (OldData.length !== 9) {
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-    } */
 
     const times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
-
-    console.log("OldData", OldData.length);
 
     //we have to add the data into one array in order for Recharts to work
     OldData.forEach(element => {
@@ -47,25 +28,31 @@ class Graph extends PureComponent {
       element.timesData = console.log(element.date);
     });
 
+    const addData = { glucose: null, date: OldData[OldData.length - 1].date };
+
+    if (OldData.length !== 9) {
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+    }
+
     const CustomTooltip = ({ active, payload, label }) => {
       if (active) {
         return (
           <div className="custom-tooltip">
+            <p className="label">Time: {moment(label).format("HH:MM")}</p>
             <p className="label">Glucemia: {payload[1].value}</p>
-            <p className="desc">Anything you want can be displayed here.</p>
           </div>
         );
       }
 
       return null;
-    };
-
-    const customLabel = () => {
-      return (
-        <text x={40} y={10} dy={0} width="100%" fill="#000000">
-          Hora de acostartse
-        </text>
-      );
     };
 
     return (
@@ -88,7 +75,7 @@ class Graph extends PureComponent {
             }}
           >
             <XAxis dataKey="date" orientation="bottom" type="number" domain={["auto", "auto"]} hide={true} scale="time" />
-            <XAxis dataKey="dateFormat" orientation="bottom" xAxisId="quarter"></XAxis>
+            <XAxis dataKey="times" orientation="bottom" xAxisId="quarter"></XAxis>
             <YAxis label={{ value: "Glucemia (mg/dL)", angle: -90, position: "insideLeft", textAnchor: "middle" }} />
 
             <CartesianGrid strokeDasharray="3 3" />
