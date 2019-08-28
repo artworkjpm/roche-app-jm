@@ -10,10 +10,11 @@ class Graph2 extends PureComponent {
     console.log(this.props);
 
     const data = this.props.patient[0];
+
     const OldData = data.glucoseMesures;
-    console.log("OldData", OldData);
+    console.log("data", data.glucoseMesures);
     //we have to add the data into one array in order for Recharts to work
-    OldData.forEach(element => {
+    /*     OldData.forEach(element => {
       element.ideal = [data.ranges.ideal.from, data.ranges.ideal.to];
       element.lowest = [data.ranges.low];
       element.highest = [data.ranges.high];
@@ -21,7 +22,7 @@ class Graph2 extends PureComponent {
       element.date = moment(element.date).format("DD/MM/YYYY HH:MM");
     });
 
-    console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose));
+    console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose)); */
     /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
 
     if (OldData.length !== 9) {
@@ -38,16 +39,57 @@ class Graph2 extends PureComponent {
 
     const chartData = {
       type: "line",
-
-      labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"],
-      datasets: [
-        {
-          label: "Glucose level",
-          //data: [617594, 181045, 153060, 106519, 105162, 95072],
-          data: OldData.map(el => el.glucose),
-          backgroundColor: ["rgba(255, 99, 132, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 206, 86, 0.6)", "rgba(75, 192, 192, 0.6)", "rgba(153, 102, 255, 0.6)", "rgba(255, 159, 64, 0.6)", "rgba(255, 99, 132, 0.6)"]
+      data: {
+        /* labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"], */
+        datasets: [
+          {
+            data: [
+              {
+                t: "2015-06-12T00:49:50+00:00",
+                y: 185
+              },
+              {
+                t: "2015-06-12T07:09:03+00:00",
+                y: 177
+              },
+              {
+                t: "2015-06-12T11:23:15+00:00",
+                y: 58
+              },
+              {
+                t: "2015-06-12T16:00:58+00:00",
+                y: 110
+              },
+              {
+                t: "2015-06-12T19:35:01+00:00",
+                y: 97
+              },
+              {
+                t: "2015-06-12T21:15:50+00:00",
+                y: 142
+              }
+            ]
+          }
+        ],
+        options: {
+          scales: {
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  unit: "hour",
+                  stepSize: 3,
+                  min: "2015-06-12T00:00",
+                  max: "2015-06-13T00:00",
+                  displayFormats: {
+                    hour: "HH:mm"
+                  }
+                }
+              }
+            ]
+          }
         }
-      ]
+      }
     };
 
     return (
@@ -59,7 +101,7 @@ class Graph2 extends PureComponent {
           <br />
         </h5>
 
-        <Line data={chartData} />
+        <Line data={chartData.data} options={chartData.data.options} />
       </div>
     );
   }
