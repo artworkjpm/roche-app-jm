@@ -21,3 +21,10 @@ ul.listx li {
 .mainbox {
   margin-top: 50px;
 }
+
+.custom-tooltip {
+  background-color: white;
+  border-radius: 6px;
+  padding: 5px 10px;
+  border: 1px solid black;
+}

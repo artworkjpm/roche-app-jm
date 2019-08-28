@@ -14,22 +14,44 @@ class Graph extends PureComponent {
 
     const data = this.props.patient[0];
     const OldData = data.glucoseMesures;
-    console.log(OldData);
+    console.log("OldData", OldData.length);
+
+    /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
+
+    if (OldData.length !== 9) {
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+      if (OldData.length < 9) {
+        OldData.push(addData);
+      }
+    } */
+
+    const times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
+
+    console.log("OldData", OldData.length);
+
     //we have to add the data into one array in order for Recharts to work
     OldData.forEach(element => {
       element.ideal = [data.ranges.ideal.from, data.ranges.ideal.to];
       element.lowest = [data.ranges.low];
       element.highest = [data.ranges.high];
-      element.times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
-      element.date = moment(element.date).format("DD/MM/YYYY HH:MM");
+      element.times = times;
+      //element.date = moment(element.date).format("DD/MM/YYYY HH:MM");
+      element.date = new Date(element.date).getTime();
+      element.dateFormat = moment(element.date).format("DD/MM/YYYY HH:MM");
+      //add length of
+      element.timesData = console.log(element.date);
     });
 
     const CustomTooltip = ({ active, payload, label }) => {
       if (active) {
         return (
           <div className="custom-tooltip">
-            <p className="label">{`${label} : ${payload[3].value}`}</p>
-            <p className="intro">test</p>
+            <p className="label">Glucemia: {payload[1].value}</p>
             <p className="desc">Anything you want can be displayed here.</p>
           </div>
         );
@@ -65,14 +87,13 @@ class Graph extends PureComponent {
               bottom: 0
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-
-            <XAxis dataKey="date" label={customLabel} />
-
+            <XAxis dataKey="date" orientation="bottom" type="number" domain={["auto", "auto"]} hide={true} scale="time" />
+            <XAxis dataKey="dateFormat" orientation="bottom" xAxisId="quarter"></XAxis>
             <YAxis label={{ value: "Glucemia (mg/dL)", angle: -90, position: "insideLeft", textAnchor: "middle" }} />
-            <Tooltip dataKey="date" />
-            <Legend />
 
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
             <Area type="monotone" dataKey="ideal" fill="#a0db78" dot={false} stroke="#a0db78" />
             <Line type="monotone" dataKey="glucose" stroke="#000000" />
             <Line type="monotone" name="lowest" dataKey="lowest" dot={false} stroke="red" label="lowest">
