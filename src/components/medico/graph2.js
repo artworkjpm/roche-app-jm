@@ -43,32 +43,12 @@ class Graph2 extends PureComponent {
         /* labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"], */
         datasets: [
           {
-            data: [
-              {
-                t: "2015-06-12T00:49:50+00:00",
-                y: 185
-              },
-              {
-                t: "2015-06-12T07:09:03+00:00",
-                y: 177
-              },
-              {
-                t: "2015-06-12T11:23:15+00:00",
-                y: 58
-              },
-              {
-                t: "2015-06-12T16:00:58+00:00",
-                y: 110
-              },
-              {
-                t: "2015-06-12T19:35:01+00:00",
-                y: 97
-              },
-              {
-                t: "2015-06-12T21:15:50+00:00",
-                y: 142
-              }
-            ]
+            data: data.glucoseMesures.map(item => {
+              return {
+                t: item.date,
+                y: item.glucose
+              };
+            })
           }
         ],
         options: {
@@ -79,8 +59,10 @@ class Graph2 extends PureComponent {
                 time: {
                   unit: "hour",
                   stepSize: 3,
-                  min: "2015-06-12T00:00",
-                  max: "2015-06-13T00:00",
+                  min: moment(data.glucoseMesures[0].date).startOf("day"),
+                  max: moment(data.glucoseMesures[0].date)
+                    .startOf("day")
+                    .add(1, "days"),
                   displayFormats: {
                     hour: "HH:mm"
                   }
@@ -91,6 +73,8 @@ class Graph2 extends PureComponent {
         }
       }
     };
+
+    console.log("min:", moment(data.glucoseMesures[0].date).startOf("day"));
 
     return (
       <div>
