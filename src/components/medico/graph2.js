@@ -48,7 +48,16 @@ class Graph2 extends PureComponent {
                 t: item.date,
                 y: item.glucose
               };
-            })
+            }),
+            fill: false,
+            label: "Glucose"
+          },
+          {
+            label: "Line Dataset",
+            data: [80, 50, 50, 50],
+
+            // Changes this dataset to become a line
+            type: "line"
           }
         ],
         options: {
@@ -85,7 +94,7 @@ class Graph2 extends PureComponent {
           <br />
         </h5>
 
-        <Line data={chartData.data} options={chartData.data.options} />
+        <Line data={chartData.data} options={chartData.data.options} height={80} />
       </div>
     );
   }
