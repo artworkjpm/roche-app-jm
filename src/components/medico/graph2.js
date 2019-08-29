@@ -113,6 +113,16 @@ class Graph2 extends PureComponent {
             xAxisID: "lowest",
             pointRadius: 0
           }
+          /*  {
+            fill: false,
+            label: "label",
+            type: "line",
+            backgroundColor: "black",
+            borderColor: "black",
+            borderWidth: 0,
+            yAxisID: "glucemia",
+            pointRadius: 0
+          } */
         ],
 
         options: {
@@ -134,6 +144,12 @@ class Graph2 extends PureComponent {
                 },
                 gridLines: {
                   borderDash: [4, 6]
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: "Tiempo",
+                  fontStyle: "bold",
+                  fontSize: 14
                 }
               },
               {
@@ -166,6 +182,13 @@ class Graph2 extends PureComponent {
               {
                 gridLines: {
                   borderDash: [4, 6]
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: "Glucemia (mg/dL)",
+                  fontStyle: "bold",
+                  fontSize: 14,
+                  padding: 20
                 }
               }
             ]
