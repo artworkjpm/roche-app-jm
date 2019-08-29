@@ -50,8 +50,8 @@ class Graph2 extends PureComponent {
             type: "line",
             fill: 2,
             xAxisID: "idealTo",
-            backgroundColor: "#CDF4BE",
-            borderColor: "#CDF4BE"
+            backgroundColor: "rgba(53, 191, 0,0.2)",
+            borderColor: "rgba(53, 191, 0,0.2)"
           },
           {
             data: data.glucoseMesures.map(item => {
@@ -64,7 +64,7 @@ class Graph2 extends PureComponent {
             label: "To",
             type: "line",
             xAxisID: "idealFrom",
-            borderColor: "#CDF4BE"
+            borderColor: "rgba(53, 191, 0,0.2)"
           },
           {
             fill: false,
