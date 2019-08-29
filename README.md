@@ -12,6 +12,8 @@ Initially I made the chart using **Recharts** however it soon became clear that 
 
 You can click on the **HOME, ABOUT, CONTACT** links to see some more information on me and the test.
 
+On the About page I made a simple TodoList to test out Redux.
+
 > ## Suggested Libraries
 
 You gave a great list of suggested tools, some of which I have used in the past, however I found I didn't have to use most of your tools for this test, for example **Ramda, styled-components, Typescript, Reselect, redux-obsversable.** This could be due to my lack of experience, I am open to learn about these tools more and their usefulness.
