@@ -3,7 +3,6 @@ import Moment from "react-moment";
 import moment from "moment";
 import { connect } from "react-redux";
 import { Line } from "react-chartjs-2";
-//import * as d3 from "d3";
 
 class Graph2 extends PureComponent {
   render() {
@@ -35,7 +34,7 @@ class Graph2 extends PureComponent {
             type: "line",
             backgroundColor: "black",
             borderColor: "black",
-            borderWidth: 1,
+            borderWidth: 2,
             xAxisID: "time"
           },
           {
@@ -51,7 +50,9 @@ class Graph2 extends PureComponent {
             fill: 2,
             xAxisID: "idealTo",
             backgroundColor: "rgba(53, 191, 0,0.2)",
-            borderColor: "rgba(53, 191, 0,0.2)"
+            borderColor: "rgba(53, 191, 0,0.2)",
+            pointRadius: 0,
+            borderWidth: 2
           },
           {
             data: data.glucoseMesures.map(item => {
@@ -64,7 +65,9 @@ class Graph2 extends PureComponent {
             label: "To",
             type: "line",
             xAxisID: "idealFrom",
-            borderColor: "rgba(53, 191, 0,0.2)"
+            borderColor: "rgba(53, 191, 0,0.2)",
+            pointRadius: 0,
+            borderWidth: 0
           },
           {
             fill: false,
@@ -72,10 +75,46 @@ class Graph2 extends PureComponent {
             type: "line",
             backgroundColor: "black",
             borderColor: "black",
-            borderWidth: 1,
-            xAxisID: "meals"
+            borderWidth: 0,
+            xAxisID: "meals",
+            pointRadius: 0
+          },
+          {
+            data: data.glucoseMesures.map(item => {
+              return {
+                t: item.date,
+                y: item.highest
+              };
+            }),
+
+            label: "Highest",
+            type: "line",
+            borderWidth: 2,
+            borderColor: "green",
+            fill: false,
+            backgroundColor: "green",
+            xAxisID: "highest",
+            pointRadius: 0
+          },
+          {
+            data: data.glucoseMesures.map(item => {
+              return {
+                t: item.date,
+                y: item.lowest
+              };
+            }),
+
+            label: "Lowest",
+            type: "line",
+            borderWidth: 2,
+            borderColor: "red",
+            fill: false,
+            backgroundColor: "red",
+            xAxisID: "lowest",
+            pointRadius: 0
           }
         ],
+
         options: {
           scales: {
             xAxes: [
@@ -113,6 +152,14 @@ class Graph2 extends PureComponent {
               {
                 id: "idealTo",
                 display: false
+              },
+              {
+                id: "highest",
+                display: false
+              },
+              {
+                id: "lowest",
+                display: false
               }
             ],
             yAxes: [
@@ -136,11 +183,37 @@ class Graph2 extends PureComponent {
             enabled: true,
             mode: "single",
             callbacks: {
-              title: function(tooltipItems, data) {
+              title: function(tooltipItems) {
                 return moment(tooltipItems[0].xLabel).format("DD/MM/YYYY HH:MM");
+              },
+              label: function(tooltipItems) {
+                return tooltipItems.yLabel;
+              },
+
+              afterTitle: function() {
+                return "Glucemia:";
+              },
+
+              footer: function() {
+                return " mg/dl";
               }
             },
-            backgroundColor: "grey"
+            backgroundColor: "white",
+            bodyFontColor: "black",
+            titleFontColor: "grey",
+            bodyFontSize: 30,
+            bodySpacing: 10,
+            displayColors: false,
+            titleSpacing: 20,
+            xPadding: 10,
+            yPadding: 15,
+            borderColor: "rgb(0, 148, 191)",
+            borderWidth: 3,
+            footerFontColor: "grey",
+            footerSpacing: 0
+          },
+          ticks: {
+            padding: 40
           }
         }
       }

@@ -4,6 +4,8 @@ import moment from "moment";
 import { ResponsiveContainer, ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from "recharts";
 import { connect } from "react-redux";
 
+//THIS FILE IS NOT ACTIVE, GRAPH2.JS IS USED, USING CHART.JS. This file uses Recharts and I had problems with the x axis so I starting using charts.js in graph2.js file
+
 class Graph extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/9xopwa9v/";
 
