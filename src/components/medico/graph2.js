@@ -17,29 +17,11 @@ class Graph2 extends PureComponent {
       element.lowest = [dataRanges.low];
       element.highest = [dataRanges.high];
     });
-
     console.log("data", data);
-
-    //console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose));
-    /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
-
-    if (OldData.length !== 9) {
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-      if (OldData.length < 9) {
-        OldData.push(addData);
-      }
-    } */
-
     console.log("ideal: ", [dataRanges.ideal.from, dataRanges.ideal.to]);
 
     const chartData = {
       data: {
-        /* labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"], */
         datasets: [
           {
             data: data.glucoseMesures.map(item => {
@@ -50,7 +32,11 @@ class Graph2 extends PureComponent {
             }),
             fill: false,
             label: "Glucose",
-            type: "line"
+            type: "line",
+            backgroundColor: "black",
+            borderColor: "black",
+            borderWidth: 1,
+            xAxisID: "time"
           },
           {
             data: data.glucoseMesures.map(item => {
@@ -60,10 +46,12 @@ class Graph2 extends PureComponent {
               };
             }),
 
-            label: "Ideal",
+            label: "Ideal glucose level",
             type: "line",
             fill: 2,
-            xAxisID: "idealTo"
+            xAxisID: "idealTo",
+            backgroundColor: "#CDF4BE",
+            borderColor: "#CDF4BE"
           },
           {
             data: data.glucoseMesures.map(item => {
@@ -73,16 +61,26 @@ class Graph2 extends PureComponent {
               };
             }),
             fill: false,
-            label: "Ideal",
+            label: "To",
             type: "line",
-            xAxisID: "idealFrom"
+            xAxisID: "idealFrom",
+            borderColor: "#CDF4BE"
+          },
+          {
+            fill: false,
+            label: "To",
+            type: "line",
+            backgroundColor: "black",
+            borderColor: "black",
+            borderWidth: 1,
+            xAxisID: "meals"
           }
         ],
         options: {
           scales: {
             xAxes: [
               {
-                stacked: true,
+                id: "time",
                 type: "time",
                 time: {
                   unit: "hour",
@@ -94,36 +92,43 @@ class Graph2 extends PureComponent {
                   displayFormats: {
                     hour: "HH:mm"
                   }
+                },
+                gridLines: {
+                  borderDash: [4, 6]
                 }
               },
+              {
+                id: "meals",
+                position: "top",
 
+                labels: ["", "Noche", "", "Desayuno", "", "Almuerzo", "", "Cena", ""],
+                gridLines: {
+                  borderDash: [4, 6]
+                }
+              },
               {
                 id: "idealFrom",
-                ticks: {
-                  display: false
-                },
                 display: false
               },
-
               {
                 id: "idealTo",
-                ticks: {
-                  display: false
-                },
                 display: false
+              }
+            ],
+            yAxes: [
+              {
+                gridLines: {
+                  borderDash: [4, 6]
+                }
               }
             ]
           },
-          plugins: {
-            filler: {
-              propagate: true
-            }
-          },
+
           legend: {
             labels: {
               filter: function(item, chart) {
                 // Logic to remove a particular legend item goes here
-                return !item.text.includes("Ideal");
+                return !item.text.includes("To");
               }
             }
           }
