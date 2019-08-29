@@ -113,16 +113,6 @@ class Graph2 extends PureComponent {
             xAxisID: "lowest",
             pointRadius: 0
           }
-          /*  {
-            fill: false,
-            label: "label",
-            type: "line",
-            backgroundColor: "black",
-            borderColor: "black",
-            borderWidth: 0,
-            yAxisID: "glucemia",
-            pointRadius: 0
-          } */
         ],
 
         options: {
