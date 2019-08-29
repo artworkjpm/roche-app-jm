@@ -8,21 +8,19 @@ import { Line } from "react-chartjs-2";
 class Graph2 extends PureComponent {
   render() {
     console.log(this.props);
-
     const data = this.props.patient[0];
-
-    const OldData = data.glucoseMesures;
-    console.log("data", data.glucoseMesures);
-    //we have to add the data into one array in order for Recharts to work
-    /*     OldData.forEach(element => {
-      element.ideal = [data.ranges.ideal.from, data.ranges.ideal.to];
-      element.lowest = [data.ranges.low];
-      element.highest = [data.ranges.high];
-      element.times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"];
-      element.date = moment(element.date).format("DD/MM/YYYY HH:MM");
+    const dataRanges = this.props.patient[0].ranges;
+    //we have to add the data into one array in order to work
+    data.glucoseMesures.forEach(element => {
+      element.idealFrom = [dataRanges.ideal.from];
+      element.idealTo = [dataRanges.ideal.to];
+      element.lowest = [dataRanges.low];
+      element.highest = [dataRanges.high];
     });
 
-    console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose)); */
+    console.log("data", data);
+
+    //console.log("data.glucoseMesures.glucose", OldData.map(el => el.glucose));
     /*  const addData = { glucose: data.ranges.ideal.to, date: OldData[0].date };
 
     if (OldData.length !== 9) {
@@ -37,8 +35,9 @@ class Graph2 extends PureComponent {
       }
     } */
 
+    console.log("ideal: ", [dataRanges.ideal.from, dataRanges.ideal.to]);
+
     const chartData = {
-      type: "line",
       data: {
         /* labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"], */
         datasets: [
@@ -50,20 +49,40 @@ class Graph2 extends PureComponent {
               };
             }),
             fill: false,
-            label: "Glucose"
+            label: "Glucose",
+            type: "line"
           },
           {
-            label: "Line Dataset",
-            data: [80, 50, 50, 50],
+            data: data.glucoseMesures.map(item => {
+              return {
+                t: item.date,
+                y: item.idealTo
+              };
+            }),
 
-            // Changes this dataset to become a line
-            type: "line"
+            label: "Ideal",
+            type: "line",
+            fill: 2,
+            xAxisID: "idealTo"
+          },
+          {
+            data: data.glucoseMesures.map(item => {
+              return {
+                t: item.date,
+                y: item.idealFrom
+              };
+            }),
+            fill: false,
+            label: "Ideal",
+            type: "line",
+            xAxisID: "idealFrom"
           }
         ],
         options: {
           scales: {
             xAxes: [
               {
+                stacked: true,
                 type: "time",
                 time: {
                   unit: "hour",
@@ -76,8 +95,37 @@ class Graph2 extends PureComponent {
                     hour: "HH:mm"
                   }
                 }
+              },
+
+              {
+                id: "idealFrom",
+                ticks: {
+                  display: false
+                },
+                display: false
+              },
+
+              {
+                id: "idealTo",
+                ticks: {
+                  display: false
+                },
+                display: false
               }
             ]
+          },
+          plugins: {
+            filler: {
+              propagate: true
+            }
+          },
+          legend: {
+            labels: {
+              filter: function(item, chart) {
+                // Logic to remove a particular legend item goes here
+                return !item.text.includes("Ideal");
+              }
+            }
           }
         }
       }
