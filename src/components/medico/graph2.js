@@ -131,6 +131,16 @@ class Graph2 extends PureComponent {
                 return !item.text.includes("To");
               }
             }
+          },
+          tooltips: {
+            enabled: true,
+            mode: "single",
+            callbacks: {
+              title: function(tooltipItems, data) {
+                return moment(tooltipItems[0].xLabel).format("DD/MM/YYYY HH:MM");
+              }
+            },
+            backgroundColor: "grey"
           }
         }
       }
