@@ -30,7 +30,7 @@ class PatientList extends Component {
           </div>
         </nav>
         <div className="row">
-          <div className="col m8 offset-m1">
+          <div className="col">
             <h4 className="center">Patient list ({this.props.patient.length})</h4>
 
             <table className="responsive-table highlight">
