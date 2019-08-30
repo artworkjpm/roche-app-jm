@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 import Moment from "react-moment";
 
@@ -19,8 +20,17 @@ class PatientList extends Component {
 
     return (
       <div className="container">
+        <nav>
+          <div className="nav-wrapper whiteBreadCrumbs">
+            <div className="col s12">
+              <NavLink exact to="/" className="breadcrumb">
+                Buscar Pacientes
+              </NavLink>
+            </div>
+          </div>
+        </nav>
         <div className="row">
-          <div className="col">
+          <div className="col m8 offset-m1">
             <h4 className="center">Patient list ({this.props.patient.length})</h4>
 
             <table className="responsive-table highlight">

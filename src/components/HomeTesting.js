@@ -25,7 +25,10 @@ class HomeTesting extends Component {
       posts.map(post => {
         return (
           <li className="collection-item" key={post.id}>
-            <Link to={"/" + post.id}>{post.title} </Link>
+            <Link to={"/" + post.id} className="btn-floating pulse">
+              <i class="material-icons">arrow_forward</i>
+            </Link>
+            <Link to={"/" + post.id}> &nbsp; &nbsp;{post.title}</Link>
           </li>
         );
       })
@@ -36,10 +39,10 @@ class HomeTesting extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col m6">
+          <div className="col m8 offset-m2">
             <ul className="collection"> {postList}</ul>
           </div>
-          <div className="col m6">
+          <div className="col m8 offset-m2 ">
             <div className="center beforeImage">
               <p>Click here to see this diagram bigger, Understanding Redux:</p>
               <img src="images/redux.JPG" alt="React explanation" width="150" onClick={this.handleOpen} className={this.state.openImage ? "enlargeImage" : ""} />

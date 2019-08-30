@@ -28,3 +28,22 @@ ul.listx li {
   padding: 5px 10px;
   border: 1px solid black;
 }
+.breadcrumb {
+  cursor: pointer;
+}
+nav {
+  box-shadow: unset;
+  background-color: white;
+}
+.whiteBreadCrumbs {
+  background-color: white;
+}
+
+.breadcrumb,
+.breadcrumb:before,
+.breadcrumb:last-child {
+  color: #26a69a;
+}
+.bold {
+  font-style: bold;
+}

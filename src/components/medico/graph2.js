@@ -3,10 +3,13 @@ import Moment from "react-moment";
 import moment from "moment";
 import { connect } from "react-redux";
 import { Line } from "react-chartjs-2";
+import { NavLink } from "react-router-dom";
 
 class Graph2 extends PureComponent {
   render() {
     console.log(this.props);
+    console.log(this.props.history);
+
     const data = this.props.patient[0];
     const dataRanges = this.props.patient[0].ranges;
     //we have to add the data into one array in order to work
@@ -236,6 +239,18 @@ class Graph2 extends PureComponent {
 
     return (
       <div>
+        <nav>
+          <div className="nav-wrapper whiteBreadCrumbs container">
+            <div className="col s12">
+              <NavLink exact to="/" className="breadcrumb">
+                Buscar Pacientes
+              </NavLink>
+              <span className="breadcrumb" onClick={this.props.history.goBack}>
+                Patient List
+              </span>
+            </div>
+          </div>
+        </nav>
         <h4 className="center">{this.props.patient[0].fullname}</h4>
         <h5 className="center">
           {this.props.patient[0].diabetesType.includes("1") ? "Tipo 1" : "Tipo 2"} &nbsp;&nbsp; Age: {<Moment diff={this.props.patient[0].dateOfBirth} unit="years" />} &nbsp;&nbsp; DOB: {<Moment format="DD/MM/YYYY">{this.props.patient[0].dateOfBirth}</Moment>}
