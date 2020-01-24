@@ -3,7 +3,7 @@ import patients from "../../data/data.json";
 import { combineReducers } from "redux";
 
 const initStatePatients = { patients };
-console.log(initStatePatients);
+//console.log(initStatePatients);
 
 const reducerPatients = (state = initStatePatients, action) => {
   return state;

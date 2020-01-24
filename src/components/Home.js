@@ -5,26 +5,40 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      fromTable: ""
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleClickTable = (practionerID) => {
+    this.setState({ fromTable: practionerID }, () => this.pushRouter()
+    );
+  }
+
+  handleSubmit = (event) => {
     //get the typed value, see if it exists in the data.practionerID, if yes load into url "/patients/id"
     event.preventDefault();
+    this.pushRouter();
+  }
+
+  pushRouter() {
     const data = this.props.patients;
-    const typedId = this.state.value;
+    let typedId;
+    if (this.state.value === "") {
+      typedId = this.state.fromTable;
+    } else {
+      typedId = this.state.value;
+    }
+    //const typedId = this.state.fromTable
     function checkPid(id) {
       return id.practitionerId === typedId;
     }
     let newList = data.filter(checkPid);
-    console.log(newList);
+    //console.log(newList);
 
     if (newList.length) {
       this.props.history.push("/patients/" + typedId);
@@ -50,6 +64,39 @@ class Home extends Component {
               </button>
             </form>
           </div>
+        </div>
+        <div className="row">
+          <table className="highlight">
+            <thead>
+              <tr>
+                <th>ID del Medico</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {this.props.patients.slice(0, 5).map(item => {
+                return (
+                  <tr key={item.patientId}>
+                    <td>{item.practitionerId}</td>
+                    <td>
+                      <button
+                        className="btn waves-effect waves-light"
+                        name="action"
+                        onClick={() => {
+                          this.handleClickTable(item.practitionerId);
+                        }}
+                      >
+                        Ver Perfil Del Medico
+                          <i className="material-icons right">send</i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+
         </div>
       </div>
     );
