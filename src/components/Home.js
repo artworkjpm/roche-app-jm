@@ -51,7 +51,7 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col m6 m6 offset-m3 mainbox">
+          <div className="col mainbox">
             <h4>Buscar Pacientes</h4>
             <p>Introduzca el ID del médico</p>
 
@@ -65,7 +65,8 @@ class Home extends Component {
             </form>
           </div>
         </div>
-        <div className="row">
+
+        <div className="row" style={{ marginTop: '50px' }}>
           <table className="highlight">
             <thead>
               <tr>
@@ -73,7 +74,6 @@ class Home extends Component {
                 <th></th>
               </tr>
             </thead>
-
             <tbody>
               {this.props.patients.slice(0, 5).map(item => {
                 return (

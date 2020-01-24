@@ -81,8 +81,8 @@ const mapStateToProps = (state, ownProps) => {
   //we can obtain href url from the props.match
   let urlPractitionerId = ownProps.match.params.practitionerId;
   //we have to return an object in order to use the data
-  console.log(urlPractitionerId);
-  console.log(state.reducerPatients.patients[0].name);
+  //console.log(urlPractitionerId);
+  //console.log(state.reducerPatients.patients[0].name);
   return {
     patient: state.reducerPatients.patients.filter(patient => patient.practitionerId === urlPractitionerId)
   };

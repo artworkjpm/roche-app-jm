@@ -26,15 +26,15 @@ class HomeTesting extends Component {
         return (
           <li className="collection-item" key={post.id}>
             <Link to={"/" + post.id} className="btn-floating pulse">
-              <i class="material-icons">arrow_forward</i>
+              <i className="material-icons">arrow_forward</i>
             </Link>
             <Link to={"/" + post.id}> &nbsp; &nbsp;{post.title}</Link>
           </li>
         );
       })
     ) : (
-      <div>No posts yet</div>
-    );
+        <div>No posts yet</div>
+      );
 
     return (
       <div className="container">
