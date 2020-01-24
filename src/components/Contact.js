@@ -4,10 +4,11 @@ const Contact = props => {
   return (
     <div className="container">
       <h4 className="center">Contact</h4>
-      <p>I'm actually working in Sant Cugat, so I can easily attend a second interview. </p>
+      <p>I'm currently looking for FrontEnd projects, I'm based in Barcelona, contact me: <br />
 
-      <p>Call me on 695966706</p>
-      <p>Email: johnnymoran44@hotmail.com</p>
+        <a href="https://jpm.netlify.com" target="_blank">JPM Website</a> <br />
+        Tel: 695966706 <br />
+        Email: johnnymoran44@hotmail.com</p>
     </div>
   );
 };
